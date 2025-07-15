@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZETA CODE - معرض الأعمال</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2ecc71; /* الأخضر الفاتح */
+            --primary-dark: #27ae60;
+            --dark-color: #111111; /* الأسود */
+            --light-color: #f8f9fa;
+            --gray-color: #2a2a2a;
+            --transition: all 0.3s ease;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #000;
+            color: var(--light-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* التصميم العام */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-title p {
+            color: #aaa;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: var(--dark-color);
+            padding: 12px 28px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: var(--dark-color);
+        }
+
+        /* الشريط العلوي */
+        .navbar {
+            background-color: rgba(17, 17, 17, 0.95);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo i {
+            margin-left: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: var(--light-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--light-color);
+            cursor: pointer;
+        }
+
+        /* القسم الرئيسي */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1554731610-1c29e9e029c5?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, transparent 20%, black 150%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: var(--primary-color);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        /* قسم المشاريع */
+        .projects {
+            background-color: var(--dark-color);
+        }
+
+        .projects-filter {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: none;
+            border: 2px solid var(--primary-color);
+            color: var(--light-color);
+            padding: 8px 20px;
+            margin: 5px 10px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary-color);
+            color: var(--dark-color);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--gray-color);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--primary-color);
+            color: var(--dark-color);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .project-img {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .project-card:hover .project-img img {
+            transform: scale(1.1);
+        }
+
+        .project-info {
+            padding: 20px;
+        }
+
+        .project-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .project-info p {
+            margin-bottom: 15px;
+            opacity: 0.8;
+            min-height: 60px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .project-tags span {
+            background: rgba(46, 204, 113, 0.2);
+            color: var(--primary-color);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin: 0 5px 5px 0;
+        }
+
+        .project-btns {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* القسم السفلي */
+        .footer {
+            background: #000;
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(46, 204, 113, 0.1);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links i {
+            margin-left: 10px;
+            color: var(--primary-color);
+        }
+
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+            padding-right: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--gray-color);
+            border-radius: 50%;
+            color: var(--light-color);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* تأثيرات متحركة */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* التصميم للجوال */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--dark-color);
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: var(--transition);
+            }
+            
+            .nav-links.active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .project-btns {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الشريط العلوي -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">
+                <i class="fas fa-code"></i>
+                ZETA CODE
+            </a>
+            
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#projects">المشاريع</a></li>
+                <li><a href="#about">عنّا</a></li>
+                <li><a href="#contact">اتصل بنا</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- القسم الرئيسي -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>معرض أعمال <span>ZETA CODE</span> الاحترافي</h1>
+                <p>استكشف أحدث مشاريعنا التكنولوجية المبتكرة التي تجمع بين الجمال البصري والأداء الفائق. نقدم حلولاً رقمية متميزة تلبي احتياجات العصر الرقمي من دمشق، سوريا.</p>
+                <div class="hero-btns">
+                    <a href="#projects" class="btn">استعرض المشاريع</a>
+                    <a href="#contact" class="btn btn-outline">تواصل معنا</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المشاريع -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <div class="section-title">
+                <h2>مشاريعنا المتميزة</h2>
+                <p>أعمال إبداعية تجسد رؤيتنا التكنولوجية من دمشق، سوريا</p>
+            </div>
+            
+            <div class="projects-filter">
+                <button class="filter-btn active" data-filter="all">الكل</button>
+                <button class="filter-btn" data-filter="ecommerce">متاجر إلكترونية</button>
+                <button class="filter-btn" data-filter="design">تصميم واجهات</button>
+                <button class="filter-btn" data-filter="web">تطبيقات ويب</button>
+            </div>
+            
+            <div class="projects-grid">
+                <!-- Tech Arab Store -->
+                <div class="project-card" data-category="ecommerce">
+                    <div class="project-badge">متجر إلكتروني</div>
+                    <div class="project-img">
+                        <img src="https://images.unsplash.com/photo-1607082350899-7e105aa886ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Tech Arab Store">
+                    </div>
+                    <div class="project-info">
+                        <h3>Tech Arab Store</h3>
+                        <p>متجر إلكتروني متخصص في بيع الأجهزة الإلكترونية والتكنولوجية الحديثة.</p>
+                        <div class="project-tags">
+                            <span>E-commerce</span>
+                            <span>Electronics</span>
+                            <span>Modern Design</span>
+                        </div>
+                        <div class="project-btns">
+                            <a href="https://tech-arab-store.vercel.app/" target="_blank" class="btn">عرض المشروع</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Electronics Store -->
+                <div class="project-card" data-category="ecommerce">
+                    <div class="project-badge">متجر إلكتروني</div>
+                    <div class="project-img">
+                        <img src="https://images.unsplash.com/photo-1605733513597-a8f8341084e6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Electronics Store">
+                    </div>
+                    <div class="project-info">
+                        <h3>Electronics Store</h3>
+                        <p>منصة متكاملة لبيع الأجهزة الإلكترونية مع واجهة مستخدم سلسة وتجربة تسوق ممتعة.</p>
+                        <div class="project-tags">
+                            <span>E-commerce</span>
+                            <span>Gadgets</span>
+                            <span>Responsive</span>
+                        </div>
+                        <div class="project-btns">
+                            <a href="https://electronics-bice.vercel.app/" target="_blank" class="btn">عرض المشروع</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Fashoon Store -->
+                <div class="project-card" data-category="ecommerce">
+                    <div class="project-badge">متجر إلكتروني</div>
+                    <div class="project-img">
+                        <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Fashoon Store">
+                    </div>
+                    <div class="project-info">
+                        <h3>Fashoon Store</h3>
+                        <p>متجر أزياء أنيق يقدم أحدث صيحات الموضة مع تجربة مستخدم متميزة.</p>
+                        <div class="project-tags">
+                            <span>Fashion</span>
+                            <span>E-commerce</span>
+                            <span>UI/UX</span>
+                        </div>
+                        <div class="project-btns">
+                            <a href="https://fashoon-store.vercel.app/" target="_blank" class="btn">عرض المشروع</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- MyStore -->
+                <div class="project-card" data-category="ecommerce">
+                    <div class="project-badge">متجر إلكتروني</div>
+                    <div class="project-img">
+                        <img src="https://images.unsplash.com/photo-1607083206968-13611e3d76db?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="MyStore">
+                    </div>
+                    <div class="project-info">
+                        <h3>MyStore</h3>
+                        <p>منصة متعددة البائعين مع نظام إدارة متكامل وتجربة مستخدم محسنة.</p>
+                        <div class="project-tags">
+                            <span>Multi-vendor</span>
+                            <span>E-commerce</span>
+                            <span>Dashboard</span>
+                        </div>
+                        <div class="project-btns">
+                            <a href="https://mystore-seven-brown.vercel.app/" target="_blank" class="btn">عرض المشروع</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Haircuts Salon -->
+                <div class="project-card" data-category="web">
+                    <div class="project-badge">تطبيق ويب</div>
+                    <div class="project-img">
+                        <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Haircuts Salon">
+                    </div>
+                    <div class="project-info">
+                        <h3>Haircuts Salon</h3>
+                        <p>موقع لحجز مواعيد صالونات الحلاقة مع معاينة تصفيفات الشعر وتقييمات العملاء.</p>
+                        <div class="project-tags">
+                            <span>Booking</span>
+                            <span>Salon</span>
+                            <span>Appointment</span>
+                        </div>
+                        <div class="project-btns">
+                            <a href="https://haircuts-omega.vercel.app/" target="_blank" class="btn">عرض المشروع</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Restaurant Menu -->
+                <div class="project-card" data-category="web">
+                    <div class="project-badge">تطبيق ويب</div>
+                    <div class="project-img">
+                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Restaurant Menu">
+                    </div>
+                    <div class="project-info">
+                        <h3>Restaurant Menu</h3>
+                        <p>قائمة طعام تفاعلية للمطاعم مع تصنيفات متعددة وتجربة مستخدم سلسة.</p>
+                        <div class="project-tags">
+                            <span>Restaurant</span>
+                            <span>Menu</span>
+                            <span>Interactive</span>
+                        </div>
+                        <div class="project-btns">
+                            <a href="https://menu-tawny-ten.vercel.app/" target="_blank" class="btn">عرض المشروع</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cars Store -->
+                <div class="project-card" data-category="web">
+                    <div class="project-badge">تطبيق ويب</div>
+                    <div class="project-img">
+                        <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Cars Store">
+                    </div>
+                    <div class="project-info">
+                        <h3>Cars Store</h3>
+                        <p>منصة لعرض وبيع السيارات مع تفاصيل كاملة وخيارات فلترة متقدمة.</p>
+                        <div class="project-tags">
+                            <span>Cars</span>
+                            <span>Automotive</span>
+                            <span>Showcase</span>
+                        </div>
+                        <div class="project-btns">
+                            <a href="https://cars-store-two.vercel.app/" target="_blank" class="btn">عرض المشروع</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bella Restaurant -->
+                <div class="project-card" data-category="web">
+                    <div class="project-badge">تطبيق ويب</div>
+                    <div class="project-img">
+                        <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Bella Restaurant">
+                    </div>
+                    <div class="project-info">
+                        <h3>Bella Restaurant</h3>
+                        <p>موقع مطعم راقي مع عرض الأطباق المميزة وإمكانية الحجز المسبق.</p>
+                        <div class="project-tags">
+                            <span>Restaurant</span>
+                            <span>Fine Dining</span>
+                            <span>Reservation</span>
+                        </div>
+                        <div class="project-btns">
+                            <a href="https://bella-psi.vercel.app/" target="_blank" class="btn">عرض المشروع</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Figma Design 1 -->
+                <div class="project-card" data-category="design">
+                    <div class="project-badge">تصميم واجهات</div>
+                    <div class="project-img">
+                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Figma Design 1">
+                    </div>
+                    <div class="project-info">
+                        <h3>تصميم تطبيق F2</h3>
+                        <p>تصميم واجهات لتطبيق متكامل مع التركيز على تجربة المستخدم وسهولة التنقل.</p>
+                        <div class="project-tags">
+                            <span>Figma</span>
+                            <span>UI/UX</span>
+                            <span>Prototype</span>
+                        </div>
+                        <div class="project-btns">
+                            <a href="https://www.figma.com/design/YjFKXdDWGSewrtrVdU4rAA/f2?node-id=0-1&p=f&t=4qBc4oWw1mSlapCE-0" target="_blank" class="btn">عرض التصميم</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Figma Design 2 -->
+                <div class="project-card" data-category="design">
+                    <div class="project-badge">تصميم واجهات</div>
+                    <div class="project-img">
+                        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Figma Design 2">
+                    </div>
+                    <div class="project-info">
+                        <h3>تصميم تطبيق Smart Driver</h3>
+                        <p>واجهات مستخدم لتطبيق سائق ذكي مع لوحة تحكم متكاملة وإحصائيات.</p>
+                        <div class="project-tags">
+                            <span>Figma</span>
+                            <span>Dashboard</span>
+                            <span>UI Design</span>
+                        </div>
+                        <div class="project-btns">
+                            <a href="https://www.figma.com/design/8IhGfabwrYGglucfhwqZ7Y/smart-driver-ahmed-mar3y?node-id=0-1&p=f&t=KLjF8CJ0eKs5WI2b-0" target="_blank" class="btn">عرض التصميم</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- القسم السفلي -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>ZETA CODE</h3>
+                    <p>نقدم حلولاً رقمية مبتكرة تجمع بين الجمال البصري والأداء الفائق لتحقيق أهداف أعمالك في العصر الرقمي من دمشق، سوريا.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/share/16CwoCo53o/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/zeta_code1?igsh=MTAzcmF3MmhiZ2twaw==" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://zetacodehaedr41.github.io/ZETA-CODE/" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="mailto:Zetacode41@gmail.com"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home"><i class="fas fa-home"></i> الرئيسية</a></li>
+                        <li><a href="#projects"><i class="fas fa-project-diagram"></i> المشاريع</a></li>
+                        <li><a href="#about"><i class="fas fa-info-circle"></i> عنّا</a></li>
+                        <li><a href="#contact"><i class="fas fa-phone"></i> اتصل بنا</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>فئات المشاريع</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-shopping-cart"></i> متاجر إلكترونية</a></li>
+                        <li><a href="#"><i class="fas fa-laptop"></i> تطبيقات ويب</a></li>
+                        <li><a href="#"><i class="fas fa-mobile-alt"></i> تطبيقات جوال</a></li>
+                        <li><a href="#"><i class="fas fa-paint-brush"></i> تصميم واجهات</a></li>
+                        <li><a href="#"><i class="fas fa-cogs"></i> أنظمة إدارة</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>اتصل بنا</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> دمشق، سوريا</li>
+                        <li><i class="fas fa-phone"></i> +963 937 334 962</li>
+                        <li><i class="fas fa-phone"></i> +963 988 422 863</li>
+                        <li><i class="fas fa-envelope"></i> Zetacode41@gmail.com</li>
+                        <li><i class="fas fa-clock"></i> الأحد - الخميس: 9 صباحاً - 5 مساءً</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 ZETA CODE. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // تفعيل القائمة على الجوال
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // فلترة المشاريع
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // إزالة النشاط من جميع الأزرار
+                filterBtns.forEach(b => b.classList.remove('active'));
+                // إضافة النشاط للزر المختار
+                btn.classList.add('active');
+                
+                const filter = btn.getAttribute('data-filter');
+                
+                projectCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // التمرير السلس
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // إغلاق القائمة على الجوال بعد النقر
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
